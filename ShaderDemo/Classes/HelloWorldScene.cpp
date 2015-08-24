@@ -24,7 +24,7 @@ bool HelloWorld::init()
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     
-    sp = Sprite::create("HelloWorld.png");
+    auto sp = Sprite::create("HelloWorld.png");
     sp->setScale(3.0);
     sp->setPosition(visibleSize/2);
     addChild(sp,0);
@@ -32,43 +32,10 @@ bool HelloWorld::init()
     RectShadeNode* rsNode = RectShadeNode::create(Rect(400, 200, 200, 200),Color4B(0,0,0,220), 100);
     //rsNode->drawReckNode(Rect(100,100,100,100), Color4B(0,0,0,100), 200);
     addChild(rsNode);
-    
 
-    //GridNode* gnode = new GridNode();
-//    gnode = GridNode::create();
-//    gnode->setPosition(100,100);
-//    //gnode->setScale(0,1);
-//    addChild(gnode);
-    
-
-//    
-//    auto sp1 = Sprite::create("HelloWorld.png");
-//    
-//    sp1->setPosition(200,200);
-//    sp->addChild(sp1);
-//    
-//    for (int i = 0; i < 50; i++) {
-//        auto sp1 = Sprite::create("HelloWorld.png");
-//        
-//        sp1->setPosition(100,100);
-//        sp->addChild(sp1,0);
-//    }
-//    
-//    scheduleUpdate();
     
     return true;
 }
-
-void HelloWorld::update(float dt)
-{
-
-    sp->getPosition();
-
-    gnode->getPosition();
-    
-}
-
-
 
 void HelloWorld::menuCloseCallback(Ref* pSender)
 {
