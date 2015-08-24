@@ -2,7 +2,10 @@
 
 #Just a lot of shader with Cocos2dx
 
-#my
+    RectShadeNode --->   Classes/nodes/
 
-#for start
+#email
 
+    linyn0612@126.com
+
+    
