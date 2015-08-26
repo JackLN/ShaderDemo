@@ -22,16 +22,10 @@ public:
     GridNode();
     ~GridNode();
     
-    virtual bool init();
-    static GridNode* create();
+    virtual bool init(std::string fileName);
+    static GridNode* create(std::string fileName);
     
 public:
-    
-    typedef struct {
-        float Position[3];
-        float Color[4];
-        float TexCoord[2];
-    }Vertex;
     
     //virtual void visit(Renderer* renderer, const Mat4 &parentTransform, uint32_t parentFlags);
     void onDraw(const Mat4& transform, uint32_t flags);
@@ -39,10 +33,8 @@ public:
     
 private:
     
-    void setdefault();
-    
-    void calVectics();
-    Vertex _vertices[4];
+    void ensureCapacity(int count);
+    void setUpBuffer(const Vec2 &lb, const Vec2 &lt, const Vec2 &rt, const Vec2& rb, const Color4B &color);
     
     CustomCommand _command;
     GLProgram* program;
@@ -52,16 +44,14 @@ private:
     std::string _textureName;
     
     //vertexbuffer & indexbuffer
-    GLuint vertexBuffer;
-    GLuint indexBuffer;
-    
-    //locations
-    GLint _colorLocation;
-    GLint _positionLocation;
-    GLint _textureLocation;
+    GLsizei _bufferCount;
+    GLuint _vbo;
+    V2F_C4B_T2F* _buffer;
     
     //uniform
-    GLuint _textureUniform;
+    GLuint _uniform;
+    
+    int _bufferCapacity;
 };
 
 

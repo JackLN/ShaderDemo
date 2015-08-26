@@ -1,6 +1,7 @@
 #include "HelloWorldScene.h"
 #include "nodes/GridNode.h"
 #include "nodes/RectShadeNode.h"
+#include "nodes/ColorNode.h"
 
 USING_NS_CC;
 
@@ -21,17 +22,32 @@ bool HelloWorld::init()
         return false;
     }
     
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    auto winSize = Director::getInstance()->getWinSize();
     
-    auto sp = Sprite::create("HelloWorld.png");
-    sp->setScale(3.0);
-    sp->setPosition(visibleSize/2);
-    addChild(sp,0);
+    auto gridNode = GridNode::create("bird.png");
+    //gridNode->setAnchorPoint(Point(0.5f, 0.5f));
+    //gridNode->setScale(3.0);
+    gridNode->setPosition(winSize.width / 2, winSize.height / 2);
+    addChild(gridNode);
+//
+//    ColorNode* node = ColorNode::create();
+//    node->setAnchorPoint(Point(0.5f, 0.5f));
+//    node->setScale(3.0);
+//    node->setPosition(winSize.width / 2, winSize.height / 2);
+//    node->setName("color_node");
+//    addChild(node);
     
-    RectShadeNode* rsNode = RectShadeNode::create(Rect(400, 200, 200, 200),Color4B(0,0,0,220), 100);
+    
+//    auto sp = Sprite::create("HelloWorld.png");
+//    
+//    
+//    sp->setScale(3.0);
+//    sp->setPosition(visibleSize/2);
+//    addChild(sp,0);
+    
+    //RectShadeNode* rsNode = RectShadeNode::create(Rect(400, 200, 200, 200),Color4B(0,0,0,220), 100);
     //rsNode->drawReckNode(Rect(100,100,100,100), Color4B(0,0,0,100), 200);
-    addChild(rsNode);
+    //addChild(rsNode);
 
     
     return true;

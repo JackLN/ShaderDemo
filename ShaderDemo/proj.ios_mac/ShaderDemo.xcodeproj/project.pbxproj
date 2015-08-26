@@ -24,6 +24,14 @@
 		352B48721B8A0EFF003F7AB1 /* rectShade.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 352B486F1B8A0EFF003F7AB1 /* rectShade.fsh */; };
 		352B48731B8A0EFF003F7AB1 /* rectShade.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 352B48701B8A0EFF003F7AB1 /* rectShade.vsh */; };
 		352B48741B8A0EFF003F7AB1 /* rectShade.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 352B48701B8A0EFF003F7AB1 /* rectShade.vsh */; };
+		352B48771B8DA0B6003F7AB1 /* ColorNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 352B48751B8DA0B6003F7AB1 /* ColorNode.cpp */; };
+		352B48781B8DA0B6003F7AB1 /* ColorNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 352B48751B8DA0B6003F7AB1 /* ColorNode.cpp */; };
+		352B487C1B8DA13F003F7AB1 /* bird.png in Resources */ = {isa = PBXBuildFile; fileRef = 352B48791B8DA13F003F7AB1 /* bird.png */; };
+		352B487D1B8DA13F003F7AB1 /* bird.png in Resources */ = {isa = PBXBuildFile; fileRef = 352B48791B8DA13F003F7AB1 /* bird.png */; };
+		352B487E1B8DA13F003F7AB1 /* ccShader_blur.vert in Resources */ = {isa = PBXBuildFile; fileRef = 352B487A1B8DA13F003F7AB1 /* ccShader_blur.vert */; };
+		352B487F1B8DA13F003F7AB1 /* ccShader_blur.vert in Resources */ = {isa = PBXBuildFile; fileRef = 352B487A1B8DA13F003F7AB1 /* ccShader_blur.vert */; };
+		352B48801B8DA13F003F7AB1 /* Color.frag in Resources */ = {isa = PBXBuildFile; fileRef = 352B487B1B8DA13F003F7AB1 /* Color.frag */; };
+		352B48811B8DA13F003F7AB1 /* Color.frag in Resources */ = {isa = PBXBuildFile; fileRef = 352B487B1B8DA13F003F7AB1 /* Color.frag */; };
 		358EDA831B64D2D400542E6B /* libcocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 358EDA801B64D2B000542E6B /* libcocos2d iOS.a */; };
 		358EDA851B64D35D00542E6B /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 358EDA841B64D35D00542E6B /* README.md */; };
 		358EDA881B64D45300542E6B /* libcocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 358EDA7E1B64D2B000542E6B /* libcocos2d Mac.a */; };
@@ -132,6 +140,11 @@
 		352B486C1B89B206003F7AB1 /* RectShadeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RectShadeNode.h; path = nodes/RectShadeNode.h; sourceTree = "<group>"; };
 		352B486F1B8A0EFF003F7AB1 /* rectShade.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = rectShade.fsh; sourceTree = "<group>"; };
 		352B48701B8A0EFF003F7AB1 /* rectShade.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = rectShade.vsh; sourceTree = "<group>"; };
+		352B48751B8DA0B6003F7AB1 /* ColorNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ColorNode.cpp; path = nodes/ColorNode.cpp; sourceTree = "<group>"; };
+		352B48761B8DA0B6003F7AB1 /* ColorNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColorNode.h; path = nodes/ColorNode.h; sourceTree = "<group>"; };
+		352B48791B8DA13F003F7AB1 /* bird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bird.png; sourceTree = "<group>"; };
+		352B487A1B8DA13F003F7AB1 /* ccShader_blur.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ccShader_blur.vert; sourceTree = "<group>"; };
+		352B487B1B8DA13F003F7AB1 /* Color.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Color.frag; sourceTree = "<group>"; };
 		358EDA781B64D2B000542E6B /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../../../cocos2d/build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
 		358EDA841B64D35D00542E6B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
 		358EDA8A1B64DBC600542E6B /* libglfw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglfw3.a; path = ../../../cocos2d/external/glfw3/prebuilt/mac/libglfw3.a; sourceTree = "<group>"; };
@@ -299,6 +312,8 @@
 				352B483C1B6CFEF9003F7AB1 /* GridSprite.h */,
 				352B486B1B89B206003F7AB1 /* RectShadeNode.cpp */,
 				352B486C1B89B206003F7AB1 /* RectShadeNode.h */,
+				352B48751B8DA0B6003F7AB1 /* ColorNode.cpp */,
+				352B48761B8DA0B6003F7AB1 /* ColorNode.h */,
 			);
 			name = nodes;
 			sourceTree = "<group>";
@@ -315,6 +330,9 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				352B48791B8DA13F003F7AB1 /* bird.png */,
+				352B487A1B8DA13F003F7AB1 /* ccShader_blur.vert */,
+				352B487B1B8DA13F003F7AB1 /* Color.frag */,
 				352B486F1B8A0EFF003F7AB1 /* rectShade.fsh */,
 				352B48701B8A0EFF003F7AB1 /* rectShade.vsh */,
 				3512313C1B6B3B4900247961 /* textureFragmentShader.frag */,
@@ -493,6 +511,7 @@
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
+				352B487E1B8DA13F003F7AB1 /* ccShader_blur.vert in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
 				3512313E1B6B3B4900247961 /* textureFragmentShader.frag in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
@@ -502,6 +521,7 @@
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
 				521A8E6519F0C34300D177D7 /* Default-736h@3x.png in Resources */,
 				521A8EA919F11F5000D177D7 /* fonts in Resources */,
+				352B487C1B8DA13F003F7AB1 /* bird.png in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
@@ -511,6 +531,7 @@
 				351231401B6B3B4900247961 /* textureVertexShader.vert in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
+				352B48801B8DA13F003F7AB1 /* Color.frag in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
 				521A8E6419F0C34300D177D7 /* Default-667h@2x.png in Resources */,
 				352B48711B8A0EFF003F7AB1 /* rectShade.fsh in Resources */,
@@ -530,9 +551,12 @@
 				3EACC99019EE6D4300EB3C5E /* res in Resources */,
 				352B48721B8A0EFF003F7AB1 /* rectShade.fsh in Resources */,
 				352B48741B8A0EFF003F7AB1 /* rectShade.vsh in Resources */,
+				352B487F1B8DA13F003F7AB1 /* ccShader_blur.vert in Resources */,
 				521A8EAA19F11F5000D177D7 /* fonts in Resources */,
 				351231411B6B3B4900247961 /* textureVertexShader.vert in Resources */,
 				46880B7C19C43A67006E1F66 /* CloseNormal.png in Resources */,
+				352B48811B8DA13F003F7AB1 /* Color.frag in Resources */,
+				352B487D1B8DA13F003F7AB1 /* bird.png in Resources */,
 				46880B7E19C43A67006E1F66 /* CloseSelected.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -547,6 +571,7 @@
 				358EDA851B64D35D00542E6B /* README.md in Sources */,
 				3512313A1B6A2AF200247961 /* GridNode.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
+				352B48771B8DA0B6003F7AB1 /* ColorNode.cpp in Sources */,
 				46880B8A19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
 				352B486D1B89B206003F7AB1 /* RectShadeNode.cpp in Sources */,
 				352B483D1B6CFEF9003F7AB1 /* GridSprite.cpp in Sources */,
@@ -564,6 +589,7 @@
 				352B486E1B89B206003F7AB1 /* RectShadeNode.cpp in Sources */,
 				3512313B1B6A2AF200247961 /* GridNode.cpp in Sources */,
 				352B483E1B6CFEF9003F7AB1 /* GridSprite.cpp in Sources */,
+				352B48781B8DA0B6003F7AB1 /* ColorNode.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				46880B8B19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
 			);

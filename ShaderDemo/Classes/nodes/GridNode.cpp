@@ -9,18 +9,24 @@
 #include "GridNode.h"
 #include "CalculatePosition.h"
 
-#define TEX_COORD_MAX   1
 GridNode::GridNode()
-{
-    _textureName = "HelloWorld.png";
-}
-
-GridNode::~GridNode()
+:_bufferCount(0)
+,_vbo(0)
+,_bufferCapacity(0)
+,_buffer(0)
 {
     
 }
 
-bool GridNode::init()
+GridNode::~GridNode()
+{
+    free(_buffer);
+    _buffer = nullptr;
+    glDeleteBuffers(1, &_vbo);
+    _vbo = 0;
+}
+
+bool GridNode::init(std::string fileName)
 {
     if (!Node::init()) {
         return false;
@@ -28,141 +34,94 @@ bool GridNode::init()
 
     //program
     program = new GLProgram;
-    program->initWithFilenames("textureVertexShader.vert", "textureFragmentShader.frag");
+    program->initWithFilenames("ccShader_blur.vert", "Color.frag");
     program->link();
     program->updateUniforms();
-
     
-    //textureID
+    _textureName = fileName;
     _textureID = Director::getInstance()->getTextureCache()->addImage(_textureName)->getName();
     
+    auto texture = Director::getInstance()->getTextureCache()->getTextureForKey(fileName);
+    auto size = texture->getContentSize();
+   
+    setUpBuffer( Vec2(0,0),Vec2(0,size.height), Vec2(size.width,size.height), Vec2(size.width,0), Color4B(0,0,0,0));
     //vbo
-    glGenBuffers(1, &vertexBuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-    
-    //vbo index
-    glGenBuffers(1, &indexBuffer);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
-    
-    setdefault();
+    glGenBuffers(1, &_vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, _vbo);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(V2F_C4B_T2F)* _bufferCapacity, _buffer, GL_STREAM_DRAW);
+    // vertex
+    glEnableVertexAttribArray(GLProgram::VERTEX_ATTRIB_POSITION);
+    glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_POSITION, 2, GL_FLOAT, GL_FALSE, sizeof(V2F_C4B_T2F), (GLvoid *)offsetof(V2F_C4B_T2F, vertices));
+    // color
+    glEnableVertexAttribArray(GLProgram::VERTEX_ATTRIB_COLOR);
+    glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_COLOR, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(V2F_C4B_T2F), (GLvoid *)offsetof(V2F_C4B_T2F, colors));
+    // texcoord
+    glEnableVertexAttribArray(GLProgram::VERTEX_ATTRIB_TEX_COORD);
+    glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_TEX_COORD, 2, GL_FLOAT, GL_FALSE, sizeof(V2F_C4B_T2F), (GLvoid *)offsetof(V2F_C4B_T2F, texCoords));
+
     
     return true;
 }
 
-void GridNode::calVectics()
+void GridNode::setUpBuffer(const Vec2 &lb, const Vec2 &lt, const Vec2 &rt, const Vec2& rb, const Color4B &color)
 {
-    // 2---1
-    // |   |
-    // 3---0
+    unsigned int vertex_count = 2*3;
+    ensureCapacity(vertex_count);
     
-    Vec2 pos = getPosition();
-    if (getParent()) {
-        Vec2 pos = getPosition() + getParent()->getPosition();
-    }
+    V2F_C4B_T2F a = {lb, Color4B(color), Tex2F( 0.0,  1.0) };
+    V2F_C4B_T2F b = {lt, Color4B(color), Tex2F( 0.0,  0.0) };
+    V2F_C4B_T2F c = {rt, Color4B(color), Tex2F( 1.0,  0.0) };
+    V2F_C4B_T2F d = {rb, Color4B(color), Tex2F( 1.0,  1.0) };
     
-    Size frameSize = Director::getInstance()->getVisibleSize();
+    V2F_C4B_T2F_Triangle *triangles = (V2F_C4B_T2F_Triangle *)(_buffer + _bufferCount);
+    V2F_C4B_T2F_Triangle triangle0 = {a, b, c};
+    V2F_C4B_T2F_Triangle triangle1 = {a, c, d};
+    triangles[0] = triangle0;
+    triangles[1] = triangle1;
     
-    Vec2 re;
-    //0
-    re = pos + mutiPos(Vec2(_contentSize.width,-_contentSize.height)
-                            ,Vec2(1-_anchorPoint.x,_anchorPoint.y));
-    re = transPosition(re, frameSize);
-    _vertices[0] = {{re.x,re.y,0}, {1, 1, 1, 1}, {TEX_COORD_MAX, TEX_COORD_MAX}};
-    
-    //1
-    re = pos + mutiPos(Vec2(_contentSize.width,_contentSize.height)
-                       ,Vec2(1-_anchorPoint.x,1-_anchorPoint.y));
-    re = transPosition(re, frameSize);
-    _vertices[1] = {{re.x,re.y,0}, {1, 1, 1, 1}, {TEX_COORD_MAX, 0}};
-    
-    //2
-    re = pos + mutiPos(Vec2(-_contentSize.width,_contentSize.height)
-                       ,Vec2(_anchorPoint.x,1-_anchorPoint.y));
-    re = transPosition(re, frameSize);
-    _vertices[2] = {{re.x,re.y,0}, {1, 1, 1, 1}, {0, 0}};
-    
-    //3
-    re = pos + mutiPos(Vec2(-_contentSize.width,-_contentSize.height)
-                       ,Vec2(_anchorPoint.x,_anchorPoint.y));
-    re = transPosition(re, frameSize);
-    _vertices[3] = {{re.x,re.y,0}, {1, 1, 1, 1}, {0, TEX_COORD_MAX}};
-
+    _bufferCount += vertex_count;
 }
 
 
 void GridNode::onDraw(const Mat4& transform, uint32_t flags)
 {
-    //push matrix
-//    Director::getInstance()->pushMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
-//    Director::getInstance()->loadIdentityMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
-//    Director::getInstance()->pushMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_PROJECTION);
-//    Director::getInstance()->loadIdentityMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_PROJECTION);
-    
-    //programe
-    
     
     program->use();
-    program->setUniformsForBuiltins();
-
+    program->setUniformsForBuiltins(transform);
     
-    //calculate & get _vertices[4]
-    calVectics();
+    glBindBuffer(GL_ARRAY_BUFFER, _vbo);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(V2F_C4B_T2F)*_bufferCapacity, _buffer, GL_STREAM_DRAW);
     
-    _positionZ = -1;
+    GLint enable = glGetUniformLocation(program->getProgram(), "u_enable");
+    program->setUniformLocationWith1i(enable, false);
     
-    _vertices[0] = {{300, 100, _positionZ}, {1, 0, 0, 1}, {TEX_COORD_MAX, 0}};
-    _vertices[1] = {{300, 300, _positionZ}, {0, 1, 0, 1}, {TEX_COORD_MAX, TEX_COORD_MAX}};
-    _vertices[2] = {{100, 300, _positionZ}, {0, 0, 1, 1}, {0, TEX_COORD_MAX}};
-    _vertices[3] = {{100, 100, _positionZ}, {0, 0, 0, 1}, {0, 0}};
-
+    GL::bindTexture2D(_textureID);
+    //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    //glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    //glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    GL::enableVertexAttribs(GL::VERTEX_ATTRIB_FLAG_POSITION | GL::VERTEX_ATTRIB_FLAG_TEX_COORD);
+    // vertex
+    glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_POSITION, 2, GL_FLOAT, GL_FALSE, sizeof(V2F_C4B_T2F), (GLvoid *)offsetof(V2F_C4B_T2F, vertices));
+    // color
+    glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_COLOR, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(V2F_C4B_T2F), (GLvoid *)offsetof(V2F_C4B_T2F, colors));
+    // textrood
+    glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_TEX_COORD, 2, GL_FLOAT, GL_FALSE, sizeof(V2F_C4B_T2F), (GLvoid *)offsetof(V2F_C4B_T2F, texCoords));
+    glDrawArrays(GL_TRIANGLES, 0, _bufferCount);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
     
-    GLubyte indices[] = {
-        0, 1, 2,
-        2, 3, 0,
-    };
-    
-    //bind
-    glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(_vertices), _vertices, GL_STATIC_DRAW);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-    
-    //setting
-    _positionLocation = glGetAttribLocation(program->getProgram(), "a_position");
-    _colorLocation = glGetAttribLocation(program->getProgram(), "a_color");
-    _textureLocation = glGetAttribLocation(program->getProgram(), "TextureCoord");
-    _textureUniform = glGetAttribLocation(program->getProgram(), "CC_Texture0");
-    
-    //programe
-    //program->use();
-    //program->setUniformsForBuiltins();
-    
-    //enable
-    glEnableVertexAttribArray(_positionLocation);
-    glEnableVertexAttribArray(_colorLocation);
-    glEnableVertexAttribArray(_textureLocation);
-    
-    //pointer
-    glVertexAttribPointer(_positionLocation, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, Position));
-    glVertexAttribPointer(_colorLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, Color));
-    glVertexAttribPointer(_textureLocation, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, TexCoord));
-    
-    // pop matrix
-    //Director::getInstance()->popMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
-    //Director::getInstance()->popMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_PROJECTION);
+    CC_INCREMENT_GL_DRAWN_BATCHES_AND_VERTICES(1, _bufferCount);
+    CHECK_GL_ERROR_DEBUG();
     
     GL::bindTexture2DN(0, _textureID);
-    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-    glEnable(GL_BLEND);
-    glEnable(GL_DEPTH_TEST);
-    glDrawElements(GL_TRIANGLES,  6, GL_UNSIGNED_BYTE, 0);
-    glUniform1i(_textureUniform, 0);
+    
+    glUniform1i(_uniform, 0);
 }
 
-GridNode* GridNode::create()
+GridNode* GridNode::create(std::string fileName)
 {
     GridNode* pRe = new GridNode();
-    if (pRe && pRe->init()) {
+    if (pRe && pRe->init(fileName)) {
         return pRe;
     }else
     {
@@ -171,17 +130,6 @@ GridNode* GridNode::create()
         return NULL;
     }
 }
-
-//void GridNode::visit(cocos2d::Renderer *renderer, const cocos2d::Mat4 &parentTransform, uint32_t parentFlags){
-//    
-//    
-//    Node::visit(renderer, parentTransform, parentFlags);
-//    
-//    _command.init(_globalZOrder);
-//    _command.func = CC_CALLBACK_0(GridNode::onDraw, this);
-//    Director::getInstance()->getRenderer()->addCommand(&_command);
-//    
-//}
 
 void GridNode::draw(cocos2d::Renderer *renderer, const cocos2d::Mat4 &transform, uint32_t flags)
 {
@@ -194,13 +142,15 @@ void GridNode::draw(cocos2d::Renderer *renderer, const cocos2d::Mat4 &transform,
     
 }
 
-void GridNode::setdefault()
+void GridNode::ensureCapacity(int count)
 {
-    Texture2D* tex = Director::getInstance()->getTextureCache()->getTextureForKey(_textureName);
+    CCASSERT(count>=0, "capacity must be >= 0");
     
-    _contentSize = tex->getContentSize();
-    _position = Vec2::ZERO;
-    
+    if(_bufferCount + count > _bufferCapacity)
+    {
+        _bufferCapacity += MAX(_bufferCapacity, count);
+        _buffer = (V2F_C4B_T2F*)realloc(_buffer, _bufferCapacity*sizeof(V2F_C4B_T2F));
+    }
 }
 
 
