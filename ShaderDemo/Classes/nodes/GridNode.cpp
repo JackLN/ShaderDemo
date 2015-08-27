@@ -35,7 +35,7 @@ bool GridNode::init(std::string fileName)
 
     //program
     program = new GLProgram;
-    program->initWithFilenames("ccShader_blur.vert", "Color.frag");
+    program->initWithFilenames("gridnode.vert", "gridnode.frag");
     program->link();
     program->updateUniforms();
     
@@ -46,7 +46,7 @@ bool GridNode::init(std::string fileName)
     auto size = texture->getContentSize();
     setContentSize(size);
    
-    setUpBuffer( Vec2(0,0),Vec2(0,size.height), Vec2(size.width,size.height), Vec2(size.width,0), Color4B(0,0,0,0));
+    setUpBuffer( Vec2(0,0),Vec2(0,size.height), Vec2(size.width,size.height), Vec2(size.width,0), Color4B(155,0,0,255));
     //vbo
     glGenBuffers(1, &_vbo);
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
@@ -102,7 +102,7 @@ void GridNode::onDraw(const Mat4& transform, uint32_t flags)
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
     glBufferData(GL_ARRAY_BUFFER, sizeof(V2F_C4B_T2F)*_bufferCapacity, _buffer, GL_STREAM_DRAW);
     
-    GLint enable = glGetUniformLocation(program->getProgram(), "u_enable");
+    GLint enable = glGetUniformLocation(program->getProgram(), "_enable");
     program->setUniformLocationWith1i(enable, _enable);
     
     GL::bindTexture2D(_textureID);

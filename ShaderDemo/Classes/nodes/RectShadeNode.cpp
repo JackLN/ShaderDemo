@@ -59,7 +59,7 @@ bool RectShadeNode::init(cocos2d::Rect rect,Color4B color,float length)
     
     _blendFunc = BlendFunc::ALPHA_PREMULTIPLIED;
     _program = new GLProgram;
-    _program->initWithFilenames("rectShade.vsh", "rectShade.fsh");
+    _program->initWithFilenames("rectShade.vert", "rectShade.frag");
     _program->link();
     _program->updateUniforms();
     
