@@ -46,7 +46,10 @@ bool GridNode::init(std::string fileName)
     auto size = texture->getContentSize();
     setContentSize(size);
    
+    
     setUpBuffer( Vec2(0,0),Vec2(0,size.height), Vec2(size.width,size.height), Vec2(size.width,0), Color4B(155,0,0,255));
+    
+    
     //vbo
     glGenBuffers(1, &_vbo);
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
@@ -152,7 +155,7 @@ void GridNode::draw(cocos2d::Renderer *renderer, const cocos2d::Mat4 &transform,
     _command.init(_globalZOrder);
     //_command.func = CC_CALLBACK_0(GridNode::onDraw, this, _modelViewTransform, flags);
     _command.func = std::bind(&GridNode::onDraw, this, _modelViewTransform,flags);
-    Director::getInstance()->getRenderer()->addCommand(&_command);
+    renderer->addCommand(&_command);
     
 }
 
