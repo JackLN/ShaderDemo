@@ -16,8 +16,6 @@
 		352B483E1B6CFEF9003F7AB1 /* GridSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 352B483B1B6CFEF9003F7AB1 /* GridSprite.cpp */; };
 		352B486D1B89B206003F7AB1 /* RectShadeNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 352B486B1B89B206003F7AB1 /* RectShadeNode.cpp */; };
 		352B486E1B89B206003F7AB1 /* RectShadeNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 352B486B1B89B206003F7AB1 /* RectShadeNode.cpp */; };
-		352B48771B8DA0B6003F7AB1 /* ColorNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 352B48751B8DA0B6003F7AB1 /* ColorNode.cpp */; };
-		352B48781B8DA0B6003F7AB1 /* ColorNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 352B48751B8DA0B6003F7AB1 /* ColorNode.cpp */; };
 		352B48831B8ECE29003F7AB1 /* hero.png in Resources */ = {isa = PBXBuildFile; fileRef = 352B48821B8ECE29003F7AB1 /* hero.png */; };
 		352B48841B8ECE29003F7AB1 /* hero.png in Resources */ = {isa = PBXBuildFile; fileRef = 352B48821B8ECE29003F7AB1 /* hero.png */; };
 		352B48A01B8F22E1003F7AB1 /* gridnode.frag in Resources */ = {isa = PBXBuildFile; fileRef = 352B489A1B8F22E1003F7AB1 /* gridnode.frag */; };
@@ -136,8 +134,6 @@
 		352B483C1B6CFEF9003F7AB1 /* GridSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GridSprite.h; path = nodes/GridSprite.h; sourceTree = "<group>"; };
 		352B486B1B89B206003F7AB1 /* RectShadeNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RectShadeNode.cpp; path = nodes/RectShadeNode.cpp; sourceTree = "<group>"; };
 		352B486C1B89B206003F7AB1 /* RectShadeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RectShadeNode.h; path = nodes/RectShadeNode.h; sourceTree = "<group>"; };
-		352B48751B8DA0B6003F7AB1 /* ColorNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ColorNode.cpp; path = nodes/ColorNode.cpp; sourceTree = "<group>"; };
-		352B48761B8DA0B6003F7AB1 /* ColorNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColorNode.h; path = nodes/ColorNode.h; sourceTree = "<group>"; };
 		352B48821B8ECE29003F7AB1 /* hero.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hero.png; sourceTree = "<group>"; };
 		352B489A1B8F22E1003F7AB1 /* gridnode.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = gridnode.frag; path = shaders/gridnode.frag; sourceTree = "<group>"; };
 		352B489B1B8F22E1003F7AB1 /* gridnode.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = gridnode.vert; path = shaders/gridnode.vert; sourceTree = "<group>"; };
@@ -312,8 +308,6 @@
 				352B483C1B6CFEF9003F7AB1 /* GridSprite.h */,
 				352B486B1B89B206003F7AB1 /* RectShadeNode.cpp */,
 				352B486C1B89B206003F7AB1 /* RectShadeNode.h */,
-				352B48751B8DA0B6003F7AB1 /* ColorNode.cpp */,
-				352B48761B8DA0B6003F7AB1 /* ColorNode.h */,
 			);
 			name = nodes;
 			sourceTree = "<group>";
@@ -579,7 +573,6 @@
 				358EDA851B64D35D00542E6B /* README.md in Sources */,
 				3512313A1B6A2AF200247961 /* GridNode.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
-				352B48771B8DA0B6003F7AB1 /* ColorNode.cpp in Sources */,
 				46880B8A19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
 				352B486D1B89B206003F7AB1 /* RectShadeNode.cpp in Sources */,
 				352B483D1B6CFEF9003F7AB1 /* GridSprite.cpp in Sources */,
@@ -597,7 +590,6 @@
 				352B486E1B89B206003F7AB1 /* RectShadeNode.cpp in Sources */,
 				3512313B1B6A2AF200247961 /* GridNode.cpp in Sources */,
 				352B483E1B6CFEF9003F7AB1 /* GridSprite.cpp in Sources */,
-				352B48781B8DA0B6003F7AB1 /* ColorNode.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				46880B8B19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
 			);

@@ -29,14 +29,7 @@ bool HelloWorld::init()
     //gridNode->setScale(3.0);
     gridNode->setPosition(winSize/2-gridNode->getContentSize()/2);
     addChild(gridNode);
-//
-//    ColorNode* node = ColorNode::create();
-//    node->setAnchorPoint(Point(0.5f, 0.5f));
-//    node->setScale(3.0);
-//    node->setPosition(winSize.width / 2, winSize.height / 2);
-//    node->setName("color_node");
-//    addChild(node);
-    
+
     
 //    auto sp = Sprite::create("HelloWorld.png");
 //    
