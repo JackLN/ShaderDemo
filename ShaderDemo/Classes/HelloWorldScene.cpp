@@ -1,7 +1,6 @@
 #include "HelloWorldScene.h"
 #include "nodes/GridNode.h"
 #include "nodes/RectShadeNode.h"
-#include "nodes/ColorNode.h"
 
 USING_NS_CC;
 
@@ -24,7 +23,7 @@ bool HelloWorld::init()
     
     auto winSize = Director::getInstance()->getWinSize();
     
-    auto gridNode = GridNode::create("hero.png");
+    GridNode* gridNode = GridNode::create("hero.png");
     //gridNode->setAnchorPoint(Point(0.5f, 0.5f));
     //gridNode->setScale(3.0);
     gridNode->setPosition(winSize/2-gridNode->getContentSize()/2);
