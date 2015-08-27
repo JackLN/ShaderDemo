@@ -14,6 +14,7 @@ GridNode::GridNode()
 ,_vbo(0)
 ,_bufferCapacity(0)
 ,_buffer(0)
+,_enable(false)
 {
     
 }
@@ -43,6 +44,7 @@ bool GridNode::init(std::string fileName)
     
     auto texture = Director::getInstance()->getTextureCache()->getTextureForKey(fileName);
     auto size = texture->getContentSize();
+    setContentSize(size);
    
     setUpBuffer( Vec2(0,0),Vec2(0,size.height), Vec2(size.width,size.height), Vec2(size.width,0), Color4B(0,0,0,0));
     //vbo
@@ -59,6 +61,14 @@ bool GridNode::init(std::string fileName)
     glEnableVertexAttribArray(GLProgram::VERTEX_ATTRIB_TEX_COORD);
     glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_TEX_COORD, 2, GL_FLOAT, GL_FALSE, sizeof(V2F_C4B_T2F), (GLvoid *)offsetof(V2F_C4B_T2F, texCoords));
 
+    
+    
+    auto touchListener = EventListenerTouchOneByOne::create();
+    
+    touchListener->onTouchBegan = CC_CALLBACK_2(GridNode::onTouchbegan,this);
+    touchListener->onTouchEnded = CC_CALLBACK_2(GridNode::onTouchEnded,this);
+    
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
     
     return true;
 }
@@ -93,13 +103,19 @@ void GridNode::onDraw(const Mat4& transform, uint32_t flags)
     glBufferData(GL_ARRAY_BUFFER, sizeof(V2F_C4B_T2F)*_bufferCapacity, _buffer, GL_STREAM_DRAW);
     
     GLint enable = glGetUniformLocation(program->getProgram(), "u_enable");
-    program->setUniformLocationWith1i(enable, false);
+    program->setUniformLocationWith1i(enable, _enable);
     
     GL::bindTexture2D(_textureID);
-    //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    //glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    //glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    
+    
+    
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+//    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+//    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    
+    
+    
     GL::enableVertexAttribs(GL::VERTEX_ATTRIB_FLAG_POSITION | GL::VERTEX_ATTRIB_FLAG_TEX_COORD);
     // vertex
     glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_POSITION, 2, GL_FLOAT, GL_FALSE, sizeof(V2F_C4B_T2F), (GLvoid *)offsetof(V2F_C4B_T2F, vertices));
@@ -114,8 +130,6 @@ void GridNode::onDraw(const Mat4& transform, uint32_t flags)
     CHECK_GL_ERROR_DEBUG();
     
     GL::bindTexture2DN(0, _textureID);
-    
-    glUniform1i(_uniform, 0);
 }
 
 GridNode* GridNode::create(std::string fileName)
@@ -153,6 +167,30 @@ void GridNode::ensureCapacity(int count)
     }
 }
 
+bool GridNode::onTouchbegan(cocos2d::Touch *touch, cocos2d::Event *unused_event)
+{
+    Vec2 pos = touch->getLocation();
+    if (pos.x > _position.x &&
+        pos.x < _position.x + _contentSize.width &&
+        pos.y > _position.y &&
+        pos.y < _position.y + _contentSize.height) {
+        
+        return true;
+    }
+    
+    return false;
+}
 
+void GridNode::onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *unused_event)
+{
+    Vec2 pos = touch->getLocation();
+    if (pos.x > _position.x &&
+        pos.x < _position.x + _contentSize.width &&
+        pos.y > _position.y &&
+        pos.y < _position.y + _contentSize.height) {
+        
+         _enable = !_enable;
+    }
+}
 
 

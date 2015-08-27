@@ -24,10 +24,10 @@ bool HelloWorld::init()
     
     auto winSize = Director::getInstance()->getWinSize();
     
-    auto gridNode = GridNode::create("bird.png");
+    auto gridNode = GridNode::create("hero.png");
     //gridNode->setAnchorPoint(Point(0.5f, 0.5f));
     //gridNode->setScale(3.0);
-    gridNode->setPosition(winSize.width / 2, winSize.height / 2);
+    gridNode->setPosition(winSize/2-gridNode->getContentSize()/2);
     addChild(gridNode);
 //
 //    ColorNode* node = ColorNode::create();

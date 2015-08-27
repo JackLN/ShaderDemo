@@ -30,6 +30,8 @@ public:
     //virtual void visit(Renderer* renderer, const Mat4 &parentTransform, uint32_t parentFlags);
     void onDraw(const Mat4& transform, uint32_t flags);
     virtual void draw(Renderer *renderer, const Mat4 &transform, uint32_t flags);
+    bool onTouchbegan(Touch *touch, Event *unused_event);
+    void onTouchEnded(Touch *touch, Event *unused_event);
     
 private:
     
@@ -48,10 +50,9 @@ private:
     GLuint _vbo;
     V2F_C4B_T2F* _buffer;
     
-    //uniform
-    GLuint _uniform;
-    
     int _bufferCapacity;
+    
+    bool _enable;
 };
 
 
