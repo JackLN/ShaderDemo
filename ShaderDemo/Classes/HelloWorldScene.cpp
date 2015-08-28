@@ -23,11 +23,25 @@ bool HelloWorld::init()
     
     auto winSize = Director::getInstance()->getWinSize();
     
-    GridNode* gridNode = GridNode::create("hero.png");
-    //gridNode->setAnchorPoint(Point(0.5f, 0.5f));
-    //gridNode->setScale(3.0);
-    gridNode->setPosition(winSize/2-gridNode->getContentSize()/2);
-    addChild(gridNode);
+    
+    auto sprite = Sprite::create("hero.png");
+    
+    auto _program = GLProgram::createWithFilenames("blur.vert", "blur.frag");
+    auto glProgramState = GLProgramState::getOrCreateWithGLProgram(_program);
+    glProgramState->setUniformVec2("u_resolution",winSize);
+    sprite->setGLProgramState(glProgramState);
+    sprite->setGLProgram(_program);
+    
+    sprite->setPosition(winSize/2);
+    addChild(sprite);
+    
+    
+    
+//    GridNode* gridNode = GridNode::create("hero.png");
+//    //gridNode->setAnchorPoint(Point(0.5f, 0.5f));
+//    //gridNode->setScale(3.0);
+//    gridNode->setPosition(winSize/2-gridNode->getContentSize()/2);
+//    addChild(gridNode);
 
     
 //    auto sp = Sprite::create("HelloWorld.png");

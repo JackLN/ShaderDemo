@@ -30,6 +30,14 @@
 		352B48A91B8F22E1003F7AB1 /* textureFragmentShader.frag in Resources */ = {isa = PBXBuildFile; fileRef = 352B489E1B8F22E1003F7AB1 /* textureFragmentShader.frag */; };
 		352B48AA1B8F22E1003F7AB1 /* textureVertexShader.vert in Resources */ = {isa = PBXBuildFile; fileRef = 352B489F1B8F22E1003F7AB1 /* textureVertexShader.vert */; };
 		352B48AB1B8F22E1003F7AB1 /* textureVertexShader.vert in Resources */ = {isa = PBXBuildFile; fileRef = 352B489F1B8F22E1003F7AB1 /* textureVertexShader.vert */; };
+		357E93DA1B905A7D0078FB97 /* blur.vert in Resources */ = {isa = PBXBuildFile; fileRef = 357E93D91B905A7D0078FB97 /* blur.vert */; };
+		357E93DB1B905A7D0078FB97 /* blur.vert in Resources */ = {isa = PBXBuildFile; fileRef = 357E93D91B905A7D0078FB97 /* blur.vert */; };
+		357E93E31B9082A90078FB97 /* blur.frag in Resources */ = {isa = PBXBuildFile; fileRef = 357E93E21B9082A90078FB97 /* blur.frag */; };
+		357E93E41B9082A90078FB97 /* blur.frag in Resources */ = {isa = PBXBuildFile; fileRef = 357E93E21B9082A90078FB97 /* blur.frag */; };
+		357E93E71B9086EF0078FB97 /* normal.frag in Resources */ = {isa = PBXBuildFile; fileRef = 357E93E51B9086EF0078FB97 /* normal.frag */; };
+		357E93E81B9086EF0078FB97 /* normal.frag in Resources */ = {isa = PBXBuildFile; fileRef = 357E93E51B9086EF0078FB97 /* normal.frag */; };
+		357E93E91B9086EF0078FB97 /* normal.vert in Resources */ = {isa = PBXBuildFile; fileRef = 357E93E61B9086EF0078FB97 /* normal.vert */; };
+		357E93EA1B9086EF0078FB97 /* normal.vert in Resources */ = {isa = PBXBuildFile; fileRef = 357E93E61B9086EF0078FB97 /* normal.vert */; };
 		358EDA831B64D2D400542E6B /* libcocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 358EDA801B64D2B000542E6B /* libcocos2d iOS.a */; };
 		358EDA851B64D35D00542E6B /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 358EDA841B64D35D00542E6B /* README.md */; };
 		358EDA881B64D45300542E6B /* libcocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 358EDA7E1B64D2B000542E6B /* libcocos2d Mac.a */; };
@@ -141,6 +149,10 @@
 		352B489D1B8F22E1003F7AB1 /* rectShade.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = rectShade.vert; path = shaders/rectShade.vert; sourceTree = "<group>"; };
 		352B489E1B8F22E1003F7AB1 /* textureFragmentShader.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = textureFragmentShader.frag; path = shaders/textureFragmentShader.frag; sourceTree = "<group>"; };
 		352B489F1B8F22E1003F7AB1 /* textureVertexShader.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = textureVertexShader.vert; path = shaders/textureVertexShader.vert; sourceTree = "<group>"; };
+		357E93D91B905A7D0078FB97 /* blur.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = blur.vert; path = shaders/blur.vert; sourceTree = "<group>"; };
+		357E93E21B9082A90078FB97 /* blur.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = blur.frag; path = shaders/blur.frag; sourceTree = "<group>"; };
+		357E93E51B9086EF0078FB97 /* normal.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = normal.frag; path = shaders/normal.frag; sourceTree = "<group>"; };
+		357E93E61B9086EF0078FB97 /* normal.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = normal.vert; path = shaders/normal.vert; sourceTree = "<group>"; };
 		358EDA781B64D2B000542E6B /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../../../cocos2d/build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
 		358EDA841B64D35D00542E6B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
 		358EDA8A1B64DBC600542E6B /* libglfw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglfw3.a; path = ../../../cocos2d/external/glfw3/prebuilt/mac/libglfw3.a; sourceTree = "<group>"; };
@@ -315,12 +327,16 @@
 		352B48991B8F22D4003F7AB1 /* shaders */ = {
 			isa = PBXGroup;
 			children = (
+				357E93E51B9086EF0078FB97 /* normal.frag */,
+				357E93E61B9086EF0078FB97 /* normal.vert */,
+				357E93E21B9082A90078FB97 /* blur.frag */,
 				352B489A1B8F22E1003F7AB1 /* gridnode.frag */,
 				352B489B1B8F22E1003F7AB1 /* gridnode.vert */,
 				352B489C1B8F22E1003F7AB1 /* rectShade.frag */,
 				352B489D1B8F22E1003F7AB1 /* rectShade.vert */,
 				352B489E1B8F22E1003F7AB1 /* textureFragmentShader.frag */,
 				352B489F1B8F22E1003F7AB1 /* textureVertexShader.vert */,
+				357E93D91B905A7D0078FB97 /* blur.vert */,
 			);
 			name = shaders;
 			sourceTree = "<group>";
@@ -511,16 +527,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
+				357E93E91B9086EF0078FB97 /* normal.vert in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
 				352B48A81B8F22E1003F7AB1 /* textureFragmentShader.frag in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
+				357E93DA1B905A7D0078FB97 /* blur.vert in Resources */,
 				46880B8119C43A67006E1F66 /* HelloWorld.png in Resources */,
+				357E93E71B9086EF0078FB97 /* normal.frag in Resources */,
 				46880B7D19C43A67006E1F66 /* CloseSelected.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
 				352B48A01B8F22E1003F7AB1 /* gridnode.frag in Resources */,
+				357E93E31B9082A90078FB97 /* blur.frag in Resources */,
 				352B48831B8ECE29003F7AB1 /* hero.png in Resources */,
 				352B48A41B8F22E1003F7AB1 /* rectShade.frag in Resources */,
 				352B48AA1B8F22E1003F7AB1 /* textureVertexShader.vert in Resources */,
@@ -548,15 +568,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				352B48A71B8F22E1003F7AB1 /* rectShade.vert in Resources */,
+				357E93EA1B9086EF0078FB97 /* normal.vert in Resources */,
 				46880B8219C43A67006E1F66 /* HelloWorld.png in Resources */,
+				357E93E81B9086EF0078FB97 /* normal.frag in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
 				352B48841B8ECE29003F7AB1 /* hero.png in Resources */,
 				352B48A91B8F22E1003F7AB1 /* textureFragmentShader.frag in Resources */,
 				3EACC99019EE6D4300EB3C5E /* res in Resources */,
 				521A8EAA19F11F5000D177D7 /* fonts in Resources */,
+				357E93DB1B905A7D0078FB97 /* blur.vert in Resources */,
 				352B48A31B8F22E1003F7AB1 /* gridnode.vert in Resources */,
 				46880B7C19C43A67006E1F66 /* CloseNormal.png in Resources */,
 				352B48AB1B8F22E1003F7AB1 /* textureVertexShader.vert in Resources */,
+				357E93E41B9082A90078FB97 /* blur.frag in Resources */,
 				46880B7E19C43A67006E1F66 /* CloseSelected.png in Resources */,
 				352B48A11B8F22E1003F7AB1 /* gridnode.frag in Resources */,
 				352B48A51B8F22E1003F7AB1 /* rectShade.frag in Resources */,
