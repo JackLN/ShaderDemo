@@ -4,6 +4,7 @@
 
     RectShadeNode --->   Classes/nodes/
     GridNode      --->   Classes/nodes/
+    BlurSprite	  --->	 Classes/nodes/GridSprite.*
 
 # Email
 
